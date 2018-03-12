@@ -38,6 +38,10 @@ public class Matriz2x2 {
     public Matriz2x2(double a, double b,
                      double c, double d) {
         // Aquí va su código.
+        this.a=a;
+        this.b=b;
+        this.c=c;
+        this.d=d;
     }
 
     /**
@@ -46,6 +50,7 @@ public class Matriz2x2 {
      */
     public double getA() {
         // Aquí va su código.
+        return this.a;
     }
 
     /**
@@ -54,6 +59,7 @@ public class Matriz2x2 {
      */
     public double getB() {
         // Aquí va su código.
+        return this.b;
     }
 
     /**
@@ -62,6 +68,7 @@ public class Matriz2x2 {
      */
     public double getC() {
         // Aquí va su código.
+        return this.c;
     }
 
     /**
@@ -70,6 +77,7 @@ public class Matriz2x2 {
      */
     public double getD() {
         // Aquí va su código.
+        return this.d;
     }
 
     /**
@@ -79,6 +87,7 @@ public class Matriz2x2 {
      */
     public Matriz2x2 suma(Matriz2x2 m) {
         // Aquí va su código.
+        return new Matriz2x2(a + m.a, b + m.b, c + m.c, d + m.d);
     }
 
     /**
@@ -89,6 +98,7 @@ public class Matriz2x2 {
      */
     public Matriz2x2 multiplica(Matriz2x2 m) {
         // Aquí va su código.
+        return new Matriz2x2(a * m.a + b * m.c , a*m.b+b*m.d, c*m.a+d*m.c,c*m.b+d*m.d);
     }
 
     /**
@@ -98,6 +108,7 @@ public class Matriz2x2 {
      */
     public Matriz2x2 multiplica(double x) {
         // Aquí va su código.
+        return new Matriz2x2(a * x, b * x, c * x, d * x);
     }
 
     /**
@@ -106,6 +117,7 @@ public class Matriz2x2 {
      */
     public double determinante() {
         // Aquí va su código.
+        return (a * d - b * c );
     }
 
     /**
@@ -118,6 +130,7 @@ public class Matriz2x2 {
      */
     public Matriz2x2 inversa() {
         // Aquí va su código.
+        return this;
     }
 
     /**
@@ -131,6 +144,7 @@ public class Matriz2x2 {
      */
     public Matriz2x2 potencia(int n) {
         // Aquí va su código.
+        return this;
     }
 
     /**
@@ -144,6 +158,7 @@ public class Matriz2x2 {
      */
     @Override public String toString() {
         // Aquí va su código.
+        return "hola";
     }
 
     /**
@@ -157,5 +172,6 @@ public class Matriz2x2 {
             return false;
         Matriz2x2 m = (Matriz2x2)o;
         // Aquí va su código.
+        return true;
     }
 }
