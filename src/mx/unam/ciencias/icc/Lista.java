@@ -382,17 +382,13 @@ public class Lista {
      */
     @Override public String toString() {
         // Aquí va su código.
-        String[] a = new String[getLongitud()];
-        Nodo n=cabeza;
-        for (int i=0;i<getLongitud();i++){
-          a[i]=(String)n.get();
-          n=n.siguiente;
+        if (getLongitud()==0){
+          return "[]";
         }
-
         String s = "[";
         for (int i = 0; i < getLongitud()-1; i++)
-            s += String.format("%s, ", a[i]);
-        s += String.format("%s]", a[getLongitud()-1]);
+            s += String.format("%s, ", (String)get(i));
+        s += String.format("%s]", (String)get(getLongitud()-1));
         return s;
     }
 
@@ -407,7 +403,15 @@ public class Lista {
             return false;
         Lista lista = (Lista)o;
         // Aquí va su código.
-            return this==o;
+        String l1=toString();
+        String l2=lista.toString();
+        for (int i=0;i<getLongitud()-1;i++){
+          if(l1.charAt(i)!=l2.charAt(i)){
+            return false;
+          }
+        }
+        return true;
+
     }
 
     /**
