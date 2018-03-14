@@ -130,7 +130,11 @@ public class Matriz2x2 {
      */
     public Matriz2x2 inversa() {
         // Aquí va su código.
-        return this;
+        Matriz2x2 m=new Matriz2x2(d,-b,-c,a);
+        if(determinante()!=0){
+          return m.multiplica((1/determinante()));
+        }
+        return null;
     }
 
     /**
@@ -144,7 +148,11 @@ public class Matriz2x2 {
      */
     public Matriz2x2 potencia(int n) {
         // Aquí va su código.
-        return this;
+        Matriz2x2 m=this;
+        for(int i=1;i<n;i++){
+          m=m.multiplica(this);
+        }
+        return m;
     }
 
     /**

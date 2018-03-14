@@ -271,7 +271,12 @@ public class Lista {
     public Lista reversa() {
         // Aquí va su código.
         Lista rev=new Lista();
-        Nodo cabeza1=this.cabeza;
+        Nodo aux=rabo;
+        while(aux.anterior!=null){
+          rev.agregaFinal(aux.get());
+          aux=aux.anterior;
+        }
+        return rev;
     }
 
     /**
@@ -281,7 +286,13 @@ public class Lista {
      */
     public Lista copia() {
         // Aquí va su código.
-        return this;
+        Lista l=new Lista();
+        Nodo n=cabeza;
+        while(n.siguiente!=null){
+          l.agregaFinal(n.get());
+          n=n.siguiente;
+        }
+        return l;
     }
 
     /**
@@ -290,6 +301,10 @@ public class Lista {
      */
     public void limpia() {
         // Aquí va su código.
+        Nodo n=cabeza;
+        while(getLongitud()!=0){
+          eliminaPrimero();
+        }
     }
 
     /**
@@ -367,7 +382,18 @@ public class Lista {
      */
     @Override public String toString() {
         // Aquí va su código.
-        return "hola";
+        String[] a = new String[getLongitud()];
+        Nodo n=cabeza;
+        for (int i=0;i<getLongitud();i++){
+          a[i]=(String)n.get();
+          n=n.siguiente;
+        }
+
+        String s = "[";
+        for (int i = 0; i < getLongitud()-1; i++)
+            s += String.format("%s, ", a[i]);
+        s += String.format("%s]", a[getLongitud()-1]);
+        return s;
     }
 
     /**
@@ -381,7 +407,7 @@ public class Lista {
             return false;
         Lista lista = (Lista)o;
         // Aquí va su código.
-            return true;
+            return this==o;
     }
 
     /**
