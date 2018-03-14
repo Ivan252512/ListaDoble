@@ -85,7 +85,7 @@ public class Lista {
      */
     public boolean esVacia() {
         // Aquí va su código.
-        return getLongitud()==0;
+        return cabeza==null;
     }
 
     /**
@@ -175,33 +175,27 @@ public class Lista {
      */
     public void elimina(Object elemento) {
         // Aquí va su código.
-        if (!esVacia() && contiene(elemento)){
-          if (cabeza.get().equals(rabo.get())){
+        if(!esVacia() && contiene(elemento)){
+          if(cabeza.siguiente==null){
             cabeza=null;
             rabo=null;
             longitud--;
-          }else if(cabeza.get().equals(elemento)){
-            Nodo aux=cabeza;
-            cabeza=aux.siguiente;
-            cabeza.anterior.siguiente=null;
-            cabeza.anterior=null;
-            longitud--;
-          }else if (rabo.get().equals(elemento)){
-            Nodo aux=rabo;
-            rabo=aux.anterior;
-            rabo.siguiente.anterior=null;
-            rabo.siguiente=null;
-            longitud--;
           }else{
-            Nodo aux=cabeza;
-            while(!aux.get().equals(elemento)){
-              aux=aux.siguiente;
+            Nodo n=cabeza;
+            while(n.siguiente!=null && !n.get().equals(elemento)){
+              n=n.siguiente;
             }
-            aux.anterior.siguiente=aux.siguiente;
-            aux.siguiente.anterior=aux.anterior;
-            aux.siguiente=null;
-            aux.anterior=null;
-            longitud--;
+            if(n.anterior==null){
+              eliminaPrimero();
+            }else if (n.siguiente==null){
+              eliminaUltimo();
+            }else{
+              n.siguiente.anterior=n.anterior;
+              n.anterior.siguiente=n.siguiente;
+              n.siguiente=null;
+              n.anterior=null;
+              longitud--;
+            }
           }
         }
     }
@@ -214,9 +208,17 @@ public class Lista {
     public Object eliminaPrimero() {
         // Aquí va su código.
         if(!esVacia()){
-          Nodo aux=cabeza;
-          elimina(cabeza.get());
-          return aux.get();
+          Nodo n=cabeza;
+          if(cabeza.siguiente==null){
+            cabeza=null;
+            rabo=null;
+          }else{
+            cabeza=cabeza.siguiente;
+            cabeza.anterior.siguiente=null;
+            cabeza.anterior=null;
+          }
+          longitud--;
+          return n.get();
         }
         return null;
     }
@@ -229,9 +231,17 @@ public class Lista {
     public Object eliminaUltimo() {
         // Aquí va su código.
         if(!esVacia()){
-          Nodo aux=rabo;
-          elimina(rabo.get());
-          return aux.get();
+          Nodo n=rabo;
+          if(rabo.anterior==null){
+            cabeza=null;
+            rabo=null;
+          }else{
+            rabo=rabo.anterior;
+            rabo.siguiente.anterior=null;
+            rabo.siguiente=null;
+          }
+          longitud--;
+          return n.get();
         }
         return null;
     }
@@ -260,7 +270,8 @@ public class Lista {
      */
     public Lista reversa() {
         // Aquí va su código.
-        return this;
+        Lista rev=new Lista();
+        Nodo cabeza1=this.cabeza;
     }
 
     /**
@@ -288,7 +299,10 @@ public class Lista {
      */
     public Object getPrimero() {
         // Aquí va su código.
-        return cabeza.get();
+        if(!esVacia()){
+          return cabeza.get();
+        }
+        return null;
     }
 
     /**
@@ -298,7 +312,10 @@ public class Lista {
      */
     public Object getUltimo() {
         // Aquí va su código.
-        return rabo.get();
+        if(!esVacia()){
+          return rabo.get();
+        }
+        return null;
     }
 
     /**
@@ -312,16 +329,16 @@ public class Lista {
      */
     public Object get(int i) {
         // Aquí va su código.
-        if (i<=0 || i>=getLongitud()){
-          return null;
+        if(0<=i && i<getLongitud()){
+          Nodo n=cabeza;
+          int cont=0;
+          while(n.siguiente!=null && cont<i){
+            n=n.siguiente;
+            cont++;
+          }
+          return n.get();
         }
-        int contador=0;
-        Nodo aux=cabeza;
-        while(contador<=i){
-          aux=aux.siguiente;
-          contador++;
-        }
-        return aux.get();
+        return null;
     }
 
     /**
@@ -373,7 +390,7 @@ public class Lista {
      */
     public Nodo getCabeza() {
         // Aquí va su código.
-        return cabeza;
+        return this.cabeza;
     }
 
     /**
@@ -382,6 +399,6 @@ public class Lista {
      */
     public Nodo getRabo() {
         // Aquí va su código.
-        return rabo;
+        return this.rabo;
     }
 }
