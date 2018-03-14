@@ -166,7 +166,30 @@ public class Matriz2x2 {
      */
     @Override public String toString() {
         // Aquí va su código.
-        return "hola";
+        String sa = String.format("%2.3f", a);
+        String sb = String.format("%2.3f", b);
+        String sc = String.format("%2.3f", c);
+        String sd = String.format("%2.3f", d);
+
+        int n = Math.max(Math.max(sa.length(), sb.length()),
+                         Math.max(sc.length(), sd.length()));
+
+        sa = agregaEspacios(sa, n);
+        sb = agregaEspacios(sb, n);
+        sc = agregaEspacios(sc, n);
+        sd = agregaEspacios(sd, n);
+
+        String s =
+            String.format("⎛ %s, %s ⎞\n", sa, sb) +
+            String.format("⎝ %s, %s ⎠",   sc, sd);
+        return s;
+    }
+
+    private String agregaEspacios(String s, int n) {
+        String r = s;
+        while (r.length() < n)
+            r = " " + r;
+        return r;
     }
 
     /**
@@ -180,6 +203,6 @@ public class Matriz2x2 {
             return false;
         Matriz2x2 m = (Matriz2x2)o;
         // Aquí va su código.
-        return true;
+        return a==m.a && b==m.b && c==m.c && d==m.d;
     }
 }

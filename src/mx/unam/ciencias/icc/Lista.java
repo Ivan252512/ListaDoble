@@ -271,10 +271,10 @@ public class Lista {
     public Lista reversa() {
         // Aquí va su código.
         Lista rev=new Lista();
-        Nodo aux=rabo;
-        while(aux.anterior!=null){
-          rev.agregaFinal(aux.get());
-          aux=aux.anterior;
+        Nodo n=rabo;
+        for(int i=1;i<=getLongitud();i++){
+          rev.agregaFinal(n.get());
+          n=n.anterior;
         }
         return rev;
     }
@@ -288,7 +288,7 @@ public class Lista {
         // Aquí va su código.
         Lista l=new Lista();
         Nodo n=cabeza;
-        while(n.siguiente!=null){
+        for(int i=1;i<=getLongitud();i++){
           l.agregaFinal(n.get());
           n=n.siguiente;
         }
