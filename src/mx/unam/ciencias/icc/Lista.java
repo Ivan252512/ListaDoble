@@ -403,15 +403,17 @@ public class Lista {
             return false;
         Lista lista = (Lista)o;
         // Aquí va su código.
-        String l1=toString();
-        String l2=lista.toString();
-        for (int i=0;i<getLongitud()-1;i++){
-          if(l1.charAt(i)!=l2.charAt(i)){
-            return false;
+        if(getLongitud()==lista.getLongitud()){
+          Nodo n1=cabeza;
+          Nodo n2=lista.cabeza;
+          for (int i=1;i<=getLongitud();i++){
+            if (!n1.equals(n2))
+              return false;
+            n1=n1.siguiente;
+            n2=n2.siguiente;
           }
         }
         return true;
-
     }
 
     /**
