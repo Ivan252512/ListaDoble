@@ -142,30 +142,29 @@ public class Lista {
      */
     public void inserta(int i, Object elemento) {
         // Aquí va su código.
+        Nodo n= new Nodo(elemento);
         if (i<=0){
-          agregaInicio(elemento);
+            agregaInicio(elemento);
         }else if (i>=getLongitud()){
-          agregaFinal(elemento);
+            agregaFinal(elemento);
+        }else if(getLongitud()==0){
+            cabeza=n;
+            rabo=n;
+            longitud++;
         }else{
-          Nodo nuevo=new Nodo(elemento);
+          int cont=0;
           Nodo aux=cabeza;
-          if (esVacia()){
-            cabeza=nuevo;
-            rabo=nuevo;
-            longitud++;
-          }else if(i<1){
-            nuevo.anterior=aux.anterior;
-            nuevo.siguiente=aux.siguiente;
-            nuevo.anterior.siguiente=nuevo;
-            nuevo.siguiente.anterior=nuevo;
-            aux.siguiente=null;
-            aux.anterior=null;
-            longitud++;
-          }else{
+          while(cont<i){
             aux=aux.siguiente;
-            inserta(i-1,elemento);
+            cont++;
           }
+          aux.anterior.siguiente=n;
+          aux.anterior=n;
+          n.siguiente=aux;
+          n.anterior=aux.anterior.anterior;
+          longitud++;
         }
+
     }
 
     /**
@@ -403,15 +402,15 @@ public class Lista {
             return false;
         Lista lista = (Lista)o;
         // Aquí va su código.
-        if(getLongitud()==lista.getLongitud()){
-          Nodo n1=cabeza;
-          Nodo n2=lista.cabeza;
-          for (int i=1;i<=getLongitud();i++){
-            if (!n1.equals(n2))
-              return false;
-            n1=n1.siguiente;
-            n2=n2.siguiente;
-          }
+        if(getLongitud()!=lista.getLongitud())
+            return false;
+        Nodo aux1=this.cabeza;
+        Nodo aux2=lista.cabeza;
+        for(int i=0;i<getLongitud();i++){
+            if(!aux1.get().equals(aux2.get()))
+                return false;
+            aux1=aux1.siguiente;
+            aux2=aux2.siguiente;
         }
         return true;
     }
